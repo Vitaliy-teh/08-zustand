@@ -15,27 +15,27 @@ const NoteList = ({ notes, onDelete }: NoteListProps) => {
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const mutation = useMutation<Note, Error, string>({
-  mutationFn: deleteNote,
-  onMutate: (id: string) => {
-    setDeletingId(id);
-  },
-  onSuccess: (_data, id) => {
-    queryClient.invalidateQueries({ queryKey: ["notes"] });
-    if (onDelete) onDelete(id);
-  },
-  onSettled: () => {
-    setDeletingId(null);
-  },
-  onError: (err: Error) => {
-    console.error("Failed to delete note:", err);
-  },
-});
+    mutationFn: deleteNote,
+    onMutate: (id: string) => {
+      setDeletingId(id);
+    },
+    onSuccess: (_data, id) => {
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
+      if (onDelete) onDelete(id);
+    },
+    onSettled: () => {
+      setDeletingId(null);
+    },
+    onError: (err: Error) => {
+      console.error("Failed to delete note:", err);
+    },
+  });
 
   if (notes.length === 0) return null;
 
   return (
     <ul className={css.list}>
-      {notes.map((note) => {
+      {notes.map(note => {
         const isDeleting = deletingId === note.id;
         return (
           <li key={note.id} className={css.listItem}>
@@ -43,7 +43,13 @@ const NoteList = ({ notes, onDelete }: NoteListProps) => {
             <p className={css.content}>{note.content}</p>
             <div className={css.footer}>
               <span className={css.tag}>{note.tag}</span>
-              <Link className={css.details} href={`/notes/${note.id}`}>View details</Link>
+              <Link
+                className={css.details}
+                href={`/notes/${note.id}`}
+                onClick={() => console.log("Opening note with ID:", note.id)}
+              >
+                View details
+              </Link>
               <button
                 className={css.button}
                 onClick={() => mutation.mutate(note.id)}
