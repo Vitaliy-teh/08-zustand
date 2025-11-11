@@ -1,5 +1,80 @@
+// import axios from "axios";
+// import type { Note } from "@/types/note";
+
+// const API_BASE = "https://notehub-public.goit.study/api";
+// const TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
+
+// export const api = axios.create({
+//   baseURL: API_BASE,
+//   headers: {
+//     Authorization: `Bearer ${TOKEN}`,
+//     "Content-Type": "application/json",
+//   },
+// });
+
+// export interface FetchNotesParams {
+//   page?: number;
+//   perPage?: number;
+//   searchText?: string;
+//   tag?: string;
+// }
+
+// export interface FetchNotesResponse {
+//   notes: Note[];
+//   totalPages: number;
+// }
+
+// export const fetchNotes = async ({
+//   page = 1,
+//   perPage = 12,
+//   searchText,
+//   tag,
+// }: FetchNotesParams = {}): Promise<FetchNotesResponse> => {
+//   const params: Record<string, unknown> = { page, perPage };
+
+//   if (searchText) params.search = searchText;
+
+//   if (tag && tag !== "all") params.tag = tag;
+
+//   const { data } = await api.get<FetchNotesResponse>("/notes", { params });
+//   return data;
+// };
+
+// export const fetchNoteById = async (id: string): Promise<Note> => {
+//   const { data } = await api.get<Note>(`/notes/${id}`);
+//   return data;
+// };
+
+// export const createNote = async (
+//   note: Omit<Note, "id" | "createdAt" | "updatedAt">
+// ): Promise<Note> => {
+//   const { data } = await api.post<Note>("/notes", note);
+//   return data;
+// };
+
+// export const deleteNote = async (id: string): Promise<Note> => {
+//   const { data } = await api.delete<Note>(`/notes/${id}`);
+//   return data;
+// };
+
+// export interface Category {
+//   id: string;
+//   name: string;
+// }
+
+// export interface NewNoteData {
+//   title: string;
+//   content: string;
+//   categoryId: string;
+// }
+
+// export const fetchCategories = async (): Promise<Category[]> => {
+//   const { data } = await api.get<Category[]>('/categories');
+//   return data;
+// };
+
 import axios from "axios";
-import type { Note } from "@/types/note";
+import type { Note, Tag } from "@/types/note";
 
 const API_BASE = "https://notehub-public.goit.study/api";
 const TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
@@ -16,7 +91,7 @@ export interface FetchNotesParams {
   page?: number;
   perPage?: number;
   searchText?: string;
-  tag?: string;
+  tag?: Tag | "all";
 }
 
 export interface FetchNotesResponse {
@@ -31,9 +106,7 @@ export const fetchNotes = async ({
   tag,
 }: FetchNotesParams = {}): Promise<FetchNotesResponse> => {
   const params: Record<string, unknown> = { page, perPage };
-
   if (searchText) params.search = searchText;
-
   if (tag && tag !== "all") params.tag = tag;
 
   const { data } = await api.get<FetchNotesResponse>("/notes", { params });
@@ -45,8 +118,32 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
   return data;
 };
 
+export interface Category {
+  id: string;
+  name: string;
+}
+
+// export const fetchCategories = async (): Promise<Category[]> => {
+//   const { data } = await api.get<Category[]>("/categories");
+//   return data;
+// };
+
+export interface NewNoteData {
+  title: string;
+  content: string;
+  tag: Tag;
+  categoryId: string;
+}
+
+// export const createNote = async (
+//   note: Omit<Note, "id" | "createdAt" | "updatedAt"> & { categoryId: string },
+// ): Promise<Note> => {
+//   const { data } = await api.post<Note>("/notes", note);
+//   return data;
+// };
+
 export const createNote = async (
-  note: Omit<Note, "id" | "createdAt" | "updatedAt">
+  note: NewNoteData
 ): Promise<Note> => {
   const { data } = await api.post<Note>("/notes", note);
   return data;
