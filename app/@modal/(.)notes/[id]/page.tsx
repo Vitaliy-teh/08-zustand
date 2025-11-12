@@ -5,10 +5,10 @@ import NotePreviewClient from "@/app/@modal/(.)notes/[id]/NotePreview.client";
 export default async function NoteModalPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
   
-  const { id } = await params;
+  const { id } = params;
 
   
   const queryClient = new QueryClient();
@@ -22,7 +22,7 @@ export default async function NoteModalPage({
   
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NotePreviewClient id={id} />
+      <NotePreviewClient/>
     </HydrationBoundary>
   );
 }
