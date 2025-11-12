@@ -24,20 +24,6 @@ export interface FetchNotesResponse {
   totalPages: number;
 }
 
-// export const fetchNotes = async ({
-//   page = 1,
-//   perPage = 12,
-//   searchText,
-//   tag,
-// }: FetchNotesParams = {}): Promise<FetchNotesResponse> => {
-//   const params: Record<string, unknown> = { page, perPage };
-//   if (searchText) params.search = searchText;
-//   if (tag && tag !== "all") params.tag = tag;
-
-//   const { data } = await api.get<FetchNotesResponse>("/notes", { params });
-//   return data;
-// };
-
 export const fetchNotes = async ({
   page = 1,
   perPage = 12,
@@ -54,11 +40,6 @@ export const fetchNotes = async ({
   return { ...data, notes };
 };
 
-// export const fetchNoteById = async (id: string): Promise<Note> => {
-//   const { data } = await api.get<Note>(`/notes/${id}`);
-//   return data;
-// };
-
 export const fetchNoteById = async (id: string): Promise<Note> => {
   const { data } = await api.get<Note>(`/notes/${id}`);
 
@@ -70,29 +51,12 @@ export interface Category {
   name: string;
 }
 
-// export const fetchCategories = async (): Promise<Category[]> => {
-//   const { data } = await api.get<Category[]>("/categories");
-//   return data;
-// };
-
 export interface NewNoteData {
   title: string;
   content: string;
   tag: Tag;
   categoryId: string;
 }
-
-// export const createNote = async (
-//   note: Omit<Note, "id" | "createdAt" | "updatedAt"> & { categoryId: string },
-// ): Promise<Note> => {
-//   const { data } = await api.post<Note>("/notes", note);
-//   return data;
-// };
-
-// export const createNote = async (note: NewNoteData): Promise<Note> => {
-//   const { data } = await api.post<Note>("/notes", note);
-//   return { ...data, id: (data as any)._id };
-// };
 
 export const createNote = async (note: NewNoteData): Promise<Note> => {
   const { data } = await api.post<Note>("/notes", note);

@@ -12,6 +12,14 @@
   color: #212529;
 }
 
+.label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: 500;
+  color: #212529;
+}
+
 .input,
 .textarea,
 .select {
@@ -21,6 +29,13 @@
   border: 1px solid #ced4da;
   border-radius: 4px;
   resize: none;
+}
+
+.textarea {
+  min-height: 200px;
+  height: auto;
+  resize: none;
+  flex: 1;
 }
 
 .actions {

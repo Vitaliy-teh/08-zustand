@@ -1,13 +1,23 @@
+import { Metadata } from "next";
 import css from "./Home.module.css";
 
-export const metadata = {
-  title: 'Page not found | NoteHub',
-  description: 'This page does not exist in NoteHub.',
+export const metadata: Metadata = {
+  title: "NoteHub",
+  description: "Page does not exist",
   openGraph: {
-    title: 'Page not found | NoteHub',
-    description: 'This page does not exist in NoteHub.',
-    url: 'https://your-vercel-app.vercel.app/not-found',
-    images: ['https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'],
+    title: "NoteHub",
+    description: "Page does not exist",
+    url: `https://08-zustand-ruddy-theta.vercel.app/`,
+    siteName: "NoteHub",
+    images: [
+      {
+        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+        width: 1200,
+        height: 630,
+        alt: "NoteHub Not Found",
+      },
+    ],
+    type: "article",
   },
 };
 

@@ -21,7 +21,7 @@ export default function NotePreviewClient() {
   });
 
   const handleClose = () => router.back();
-  
+
   if (isLoading)
     return (
       <Modal onClose={handleClose}>
