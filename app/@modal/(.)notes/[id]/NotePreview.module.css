@@ -49,7 +49,6 @@
 }
 
 .date::before {
-  content: "Created:";
   margin-right: 2px;
   color: #666;
 }

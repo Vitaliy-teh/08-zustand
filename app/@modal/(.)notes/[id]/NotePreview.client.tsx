@@ -20,10 +20,8 @@ export default function NotePreviewClient() {
     refetchOnMount: false,
   });
 
-  const handleClose = () => {
-    router.back();
-  };
-
+  const handleClose = () => router.back();
+  
   if (isLoading)
     return (
       <Modal onClose={handleClose}>
