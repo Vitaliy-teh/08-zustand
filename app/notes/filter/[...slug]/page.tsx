@@ -6,13 +6,16 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
+import type { Metadata } from "next";
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string[] };
-}) {
-  const filter = params.slug?.[0] ?? "all";
+  params: Promise<{ slug: string[] }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const filter = slug?.[0] ?? "all";
+
   return {
     title: `Notes: ${filter} | NoteHub`,
     description: `Viewing notes filtered by ${filter}.`,

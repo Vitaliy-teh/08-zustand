@@ -56,7 +56,7 @@ export default function NoteForm() {
       title: values.title,
       content: values.content,
       tag: values.tag as Tag,
-      categoryId: values.categoryId,
+      // categoryId: values.categoryId,
     };
     mutate(newNote);
   };
@@ -71,7 +71,7 @@ export default function NoteForm() {
             name="title"
             required
             className={css.input}
-            defaultValue={draft.title}
+            value={draft.title}
             onChange={handleChange}
           />
         </label>
@@ -84,7 +84,7 @@ export default function NoteForm() {
             name="content"
             required
             className={css.textarea}
-            defaultValue={draft.content}
+            value={draft.content}
             onChange={handleChange}
           />
         </label>
@@ -97,7 +97,7 @@ export default function NoteForm() {
             name="tag"
             required
             className={css.select}
-            defaultValue={draft.tag}
+            value={draft.tag}
             onChange={handleChange}
           >
             <option value="">Select tag</option>
